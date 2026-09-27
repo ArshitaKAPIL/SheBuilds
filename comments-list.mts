@@ -4,6 +4,7 @@ import { getDatabase } from "@netlify/database";
 export default async (req: Request, context: Context) => {
   if (req.method !== "GET") return new Response("Method not allowed", { status: 405 });
   const db = getDatabase();
+  await db.sql`CREATE TABLE IF NOT EXISTS comments (id SERIAL PRIMARY KEY, name TEXT NOT NULL, field TEXT, body TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', created_at TIMESTAMPTZ DEFAULT NOW())`;
   const rows = await db.sql`
     SELECT id, name, field, body, created_at
     FROM comments

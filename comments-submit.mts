@@ -31,6 +31,7 @@ export default async (req: Request, context: Context) => {
   }
 
   const db = getDatabase();
+  await db.sql`CREATE TABLE IF NOT EXISTS comments (id SERIAL PRIMARY KEY, name TEXT NOT NULL, field TEXT, body TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', created_at TIMESTAMPTZ DEFAULT NOW())`;
   await db.sql`
     INSERT INTO comments (name, field, body, status)
     VALUES (${name}, ${field}, ${text}, 'pending')
