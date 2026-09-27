@@ -1,0 +1,9 @@
+{
+  "name": "shebuilds-site",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@netlify/database": "*",
+    "@netlify/functions": "*"
+  }
+}
